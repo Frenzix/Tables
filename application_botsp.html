@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>REQUEST REGULATOR</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <style type='text/css'>
+        .req_outer {
+            background-color : #fff;
+            min-height: 110vh;
+        }
+        
+        .pad_add {
+            margin-bottom: 12px;
+        }
+
+        .desc{
+            font-family : sans-serif ;
+        }
+
+        .para{
+            margin-top: 4%;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="req_outer">
+        <div class="pad_add container-fluid p-3 bg-dark text-white">
+            <h1>STANDARD REQUEST REGULATOR</h1>
+            <p>Written By Avis Khatiwada w/ Golang</p>
+        </div>
+
+        <div class="container">
+            <div class="table-responsive">
+
+                <table class='table table-dark table-hover'>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Text</th>
+                        <th>Description</th>
+
+                    </tr>
+
+                    {{range .Events}}
+
+                    <tr>
+                        <th>{{.ID}}</th>
+                        <th>{{.Title}}</th>
+                        <th>{{.Description}}</th>
+                    </tr>
+
+                    {{end}}
+
+                </table>
+
+            </div>
+
+            <div class = "container-fluid" style = "padding-top: 70px; padding-bottom: 70px;">
+                <h1 class="display-5">Deploying Requests With Curl: </h1> To append data to the above table, it is reccomended
+                to use a speciailized interface to send requests, such as <mark>Curl.</mark> The below arguments and
+                fields display how to use curl to do so.
+
+                <h1 class="display-5 para">GET Requests</h1>
+                <h5><small>To recieve data from stored variables divulged in the table, use the following curl command in your terminal window.<br> <kbd>curl http://localhost:8000/events</kbd> </small></h5>
+
+                <h1 class="display-5 para">POST Requests</h1>
+                <h5><small>To send data to stored variables, and therefore protracting the table, use the following curl command in your terminal window. <br>
+                    <kbd> curl -X POST -H 'Content-type:application/json' -d '{"ID":"IDHERE", "Title":"TITLEHERE", "Description":"DESHERE"}' http://localhost:8000/event</kbd></small></h5>
+
+                <span class="d-flex flex-nowrap float-right para">
+                  <button type="button" class="btn btn-primary show_button">More Request Types</button>
+                  <button type="button" class="btn btn-danger hide_button">Less Request Types</button>
+                </span>
+
+                <div class="collapse">
+
+                <h1 class="display-5 para">PATCH (Update) Requests</h1>
+
+                <h5><small>To retract data from the table,by means of ID,use the following curl command in your terminal window. <br>
+                    <kbd> curl -X PATCH -H 'Content-type:application/json' -d '{"ID":"IDHERE", "Title":"TITLEHERE", "Description":"DESHERE"}' http://127.0.0.1:8000/{id}</kbd></small></h5>
+
+                <h1 class="display-5 para">DELETE Requests</h1>
+                <h5><small>To retract data from the table,by means of ID, use the following curl command in your terminal window. <br>
+                    <kbd>curl -X DELETE -H '{"Content-type":"application/json"} -d '{"ID":"IDHERE", "Title":"TITLEHERE", "Description":"DESHERE"}' http://127.0.0.1:8000/{id}</kbd></small></h5>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        $(document).ready(function(){
+
+            $(".show_button").click(function(){
+                $(".collapse").collapse('show')
+            })
+
+            $(".hide_button").click(function(){
+                $(".collapse").collapse('hide')
+            })
+
+        })
+    </script>
+
+</body>
+
+</html>
